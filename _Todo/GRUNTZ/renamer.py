@@ -5,11 +5,15 @@ import sys
 
 
 def rename_anims(type):
-    path = f"../../Editing/GruntzREZ/GRUNTZ/{type}GRUNT"
+    path = f"./{type}GRUNT"
 
     for folder in os.listdir(path):
         if folder == "DEATH":
-            subprocess.run(["convert", "+append", f"{path}{folder}/*.png", f"{type}Grunt_Death.png"])
+            subprocess.run(["convert", "+append", f"{path}/{folder}/*.png", f"{type}Grunt_Death.png"])
+        else:
+            directionpath = f"{path}/{folder}"
+            for subfolder in os.listdir(directionpath):
+                subprocess.run(["convert", "+append", f"{directionpath}/{subfolder}/*.png", f"{type}Grunt_{subfolder}_{folder}.png"])
         # if folder == "CRUMBLEWATERBRIDGE":
         #     subprocess.run(["convert", "+append", f"{path}{folder}/*.png", f"{path}Bridge_Water_Crumble.png"])
         # if folder == "DEATHBRIDGE":
